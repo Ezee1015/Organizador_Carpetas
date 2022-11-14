@@ -19,6 +19,9 @@ public class SelectorDia extends javax.swing.JFrame {
 
     public SelectorDia(String dia) {
         final int numeroDia;
+        if(dia.equals("")) //Evita que puedas pasar un dia vacío
+            return;
+        System.out.println("dia es " + dia);
         switch(dia){
             case "Lunes": numeroDia=0; break;
             case "Martes": numeroDia=1; break;
@@ -37,21 +40,24 @@ public class SelectorDia extends javax.swing.JFrame {
                     return;
                 // CheckBox materia
                 final int pos=i*3+x;
-                JCheckBox musica = new JCheckBox(MenuPrincipal.listaMaterias.get(pos));
-                musica.setBounds(30*(x+1)+150*x, 50+50*i, 150, 15);
-                musica.setOpaque(false);
-                add(musica);
-                musica.addItemListener((ItemEvent e) -> {
+                JCheckBox checkMateria = new JCheckBox(MenuPrincipal.listaMaterias.get(pos));
+                checkMateria.setBounds(30*(x+1)+150*x, 50+50*i, 150, 15);
+                checkMateria.setOpaque(false);
+                //Si la materia ya está en la lista del dia
+                if(MenuPrincipal.diasMaterias.get(numeroDia).contains(MenuPrincipal.listaMaterias.get(pos)))
+                    checkMateria.setSelected(true);
+                add(checkMateria);
+                checkMateria.addItemListener((ItemEvent e) -> {
                     if(e.getStateChange()==1) {//activado
-                        ArrayList<String> temp = menu.diasMaterias.get(numeroDia);
+                        ArrayList<String> temp = MenuPrincipal.diasMaterias.get(numeroDia);
                         temp.add(MenuPrincipal.listaMaterias.get(pos));
-                        menu.diasMaterias.add(numeroDia, temp);
-                        menu.diasMaterias.remove(numeroDia+1);
+                        MenuPrincipal.diasMaterias.add(numeroDia, temp);
+                        MenuPrincipal.diasMaterias.remove(numeroDia+1);
                         System.out.println("se activo el " + MenuPrincipal.listaMaterias.get(pos));
                     } else {
-                        for(int z=0;z<menu.diasMaterias.size();z++){
-                            if(menu.diasMaterias.get(z).equals(MenuPrincipal.listaMaterias.get(pos))){
-                                ArrayList<String> temp = menu.diasMaterias.get(numeroDia);
+                        for(int z=0;z<MenuPrincipal.diasMaterias.size();z++){
+                            if(MenuPrincipal.diasMaterias.get(z).equals(MenuPrincipal.listaMaterias.get(pos))){
+                                ArrayList<String> temp = MenuPrincipal.diasMaterias.get(numeroDia);
                                 temp.remove(z);
                                 menu.diasMaterias.add(numeroDia, temp);
                                 menu.diasMaterias.remove(numeroDia+1);
