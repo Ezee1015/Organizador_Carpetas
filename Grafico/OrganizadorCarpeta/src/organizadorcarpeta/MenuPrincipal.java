@@ -9,6 +9,17 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import com.formdev.flatlaf.FlatDarkLaf;
+import java.awt.Image;
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 /**
  *
@@ -315,7 +326,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
+        Cargando temp = new Cargando();
+        temp.main(null);
+        setVisible(false);
+        // funcion de calculos
+        temp.dispose();
+        // Hacer visible la nueva ventana de los resultados
     }//GEN-LAST:event_jButton8ActionPerformed
 
     /**
