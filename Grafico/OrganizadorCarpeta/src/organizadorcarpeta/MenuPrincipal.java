@@ -15,6 +15,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     public static ArrayList<ArrayList<String>> diasMaterias = new ArrayList<>();
     public static ArrayList<ArrayList<Integer>> res = new ArrayList<>();
     public static int materiasPorCarpeta;
+    public static int maximoCarpetasPorDia;
 
     public MenuPrincipal() {
         initComponents();
@@ -29,6 +30,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -42,6 +44,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menu Principal");
@@ -66,7 +73,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Materias por Carpeta: ");
+        jLabel1.setText("Materias por Carpeta:");
 
         jButton1.setText("Cargar Materias");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -132,6 +139,43 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jLabel4.setText("Configure los días...");
 
+        jTextField2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField2.setText("2");
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
+        jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField2KeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField2KeyTyped(evt);
+            }
+        });
+
+        jLabel5.setText("Máximo de Carpetas por Día:");
+
+        jLabel6.setText("Modo de Cálculo...");
+
+        buttonGroup1.add(jRadioButton1);
+        jRadioButton1.setSelected(true);
+        jRadioButton1.setText("Modo Rápido");
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(jRadioButton2);
+        jRadioButton2.setText("Modo Lento");
+        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -140,62 +184,80 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(78, 78, 78)
+                                .addComponent(jLabel2))
+                            .addComponent(jLabel6))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(44, 44, 44)
-                                .addComponent(jButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
-                                .addComponent(jLabel1)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(36, 36, 36)
+                                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(56, 56, 56)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jRadioButton1)
+                                                .addGap(38, 38, 38)
+                                                .addComponent(jRadioButton2))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(38, 38, 38)
+                                                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addGap(44, 44, 44)
+                                        .addComponent(jButton1))
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel1))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(31, 31, 31)
-                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(45, 45, 45))))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(39, 39, 39))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(65, 65, 65)
-                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(38, 38, 38)
-                                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(84, 84, 84)
-                .addComponent(jLabel2)
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(24, 24, 24)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel3)
+                        .addGap(12, 12, 12)
+                        .addComponent(jButton1)
+                        .addGap(21, 21, 21))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel1))
+                                .addGap(28, 28, 28))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel5)
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -206,7 +268,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton5)
                     .addComponent(jButton6))
-                .addGap(44, 44, 44)
+                .addGap(20, 20, 20)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRadioButton1)
+                    .addComponent(jRadioButton2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton7)
                     .addComponent(jButton8))
@@ -319,6 +387,182 @@ public class MenuPrincipal extends javax.swing.JFrame {
         // Hacer visible la nueva ventana de los resultados
     }//GEN-LAST:event_jButton8ActionPerformed
 
+    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton2ActionPerformed
+
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jTextField2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyTyped
+        
+    }//GEN-LAST:event_jTextField2KeyTyped
+
+    private void jTextField2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyReleased
+        for (int i = 0; i < jTextField2.getText().length(); i++) {
+            switch (this.jTextField2.getText().charAt(i)) {
+                case '0':
+                case '1':
+                case '2':
+                case '3':
+                case '4':
+                case '5':
+                case '6':
+                case '7':
+                case '8':
+                case '9':
+                    break;
+                default:
+                    jTextField2.setText(String.valueOf(maximoCarpetasPorDia));
+                    JOptionPane.showMessageDialog(null,"Solamente se pueden ingresar numeros!");
+                    return;
+            }
+        }
+        maximoCarpetasPorDia=Integer.parseInt(jTextField2.getText());
+    }//GEN-LAST:event_jTextField2KeyReleased
+
+    /* OPERACION DE CALCULOS */
+    
+    private void cargaLenta () {
+        ArrayList<Integer> totalPosibilidades = new ArrayList(); // VECTOR CON NUMEROS DEL 0 AL 'X' CANTIDAD DE MATERIAS PARA ENTREGARLO A LA FUNCION QUE RELLENA LA MATRIZ CON TODAS LAS POSIBILIDADES
+        for(int i=1;i<=listaMaterias.size();i++){
+            totalPosibilidades.add(i);
+        }
+        ArrayList<Integer> vacio = new ArrayList();
+        cargarPosi(totalPosibilidades, vacio);
+        
+        ArrayList<int[][]> carpetasHistorial = new ArrayList();
+        for(int i=0;i<posibilidades(totalPosibilidades.size());i++) { // Por cada Carpeta
+            int carpetas[][] = new int[(listaMaterias.size()/materiasPorCarpeta)+1][materiasPorCarpeta];
+            for(int x=1;x<=listaMaterias.size(); x++) {
+                carpetas[(x-1)/materiasPorCarpeta][(x-1)%materiasPorCarpeta]=res.get(i).get(x-1);
+
+            }
+            // ordena la Matriz "carpeta" horizontalmente y luego verticalmente
+            for(int x=0;x<(listaMaterias.size()/materiasPorCarpeta)+1;x++) { // por cada vector...
+                for(int z=0;z<materiasPorCarpeta;z++){ // Repetir la cantidad de veces de largo del vector
+                    for(int y=1;y<materiasPorCarpeta;y++){ // Recorrer por cada materia
+                        if(carpetas[x][y-1] == 0) carpetas[x][y-1] = 2147483647; // si es 0, o sea vacio, lo llena con el int mas grande
+                        if(carpetas[x][y-1] > carpetas[x][y]) { // Aplica Burbujeo
+                            int swap = carpetas[x][y-1];
+                            carpetas[x][y-1] = carpetas[x][y];
+                            carpetas[x][y] = swap;
+                        }
+                    }
+                }
+            }
+            for(int x=0;x<(listaMaterias.size()/materiasPorCarpeta)+1;x++) { // Repetir la cant. de veces de largo del vector...
+                for(int y=1;y<(listaMaterias.size()/materiasPorCarpeta)+1;y++){
+                    if(carpetas[y-1][0] > carpetas[y][0]) { // Aplica Burbujeo
+                        int swap[] = new int[materiasPorCarpeta];
+                        System.arraycopy(carpetas[y-1], 0, swap, 0, materiasPorCarpeta); //System.out.println(swap[z]);
+                        System.arraycopy(carpetas[y], 0, carpetas[y-1], 0, materiasPorCarpeta);
+                        System.arraycopy(swap, 0, carpetas[y], 0, materiasPorCarpeta);
+                    }
+                }
+            }
+            
+            // Busque que no haya repetidos anteriores
+            int Encontrado=0;
+            if (carpetasHistorial.isEmpty()) carpetasHistorial.add(carpetas);
+            else {
+                for(int x=0;x<carpetasHistorial.size();x++) {
+                    int coincidencias=0;
+                    for(int y=0;y<(listaMaterias.size()/materiasPorCarpeta)+1;y++){
+                        for(int z=0;z<materiasPorCarpeta;z++){
+                            if(carpetas[y][z] == carpetasHistorial.get(x)[y][z]) coincidencias++;
+                        }
+                    }
+                    if(coincidencias>listaMaterias.size()) Encontrado=1;
+                }
+            }
+            
+            if(Encontrado==0) { // Si no se encontró un vector igual, imprimirlo
+                carpetasHistorial.add(carpetas);
+                int cantC[] = new int [5];
+                for(int x=0; x<5;x++){
+                    cantC[x] = carpetasPorDia(carpetas, diasMaterias.get(x));
+                }
+                int max=cantC[0];
+                for(int x=1;x<cantC.length;x++) if(max<cantC[x]) max=cantC[x];
+                if(max<=maximoCarpetasPorDia) imprimirCarpetaGanadora(carpetas, cantC);
+            }
+            
+
+        }
+    }
+    
+    public static int carpetasPorDia (int carpeta[][], ArrayList<String> dia) {
+        ArrayList<Integer> eleccionCarpeta = new ArrayList();
+        for(int i=0;i<dia.size();i++){
+            ///COMPRUEBA EL NUMERO DE LA MATERIA
+            int numeroMateria=-1;
+            for(int x=0;x<listaMaterias.size();x++){
+                if(listaMaterias.get(x).equalsIgnoreCase(dia.get(i))) numeroMateria=x;
+            }
+            ///Empiza la Busqueda
+            for(int x=0;x<(listaMaterias.size()/materiasPorCarpeta)+1;x++){
+                for(int y=0;y<materiasPorCarpeta;y++){
+                    if(carpeta[x][y] == numeroMateria) {
+                        eleccionCarpeta.add(x);
+                    }                    
+                }
+            }
+        }
+            ArrayList<Integer> carpetasEncontradas = new ArrayList();
+            
+            for(int i=0;i<eleccionCarpeta.size();i++){
+                // VERIFICA SI LA CARPETA YA SE HABIA ENCONTRADO
+                int boolYaEncontrada=0;
+                for(int x=0;x<carpetasEncontradas.size();x++){
+                    if(eleccionCarpeta.get(i).equals(carpetasEncontradas.get(x))) {
+                        boolYaEncontrada=1;
+                        break;
+                    }
+                }
+                if (boolYaEncontrada==0) carpetasEncontradas.add(eleccionCarpeta.get(i));
+            }
+        return carpetasEncontradas.size() ;
+    }
+    public static void cargarPosi (ArrayList<Integer> totalPosibilidades, ArrayList<Integer> posibilidad) {
+        for(int i=0;i<totalPosibilidades.size();i++) { 
+            if(totalPosibilidades.size() == 1) { // Si queda solo un numero lo agrega al arraylist y lo guarda ese array en el arraylist de los otros arraylist
+                posibilidad.add(totalPosibilidades.get(0));
+                res.add(posibilidad);
+            } else { // Aplica la recursion
+                // Agrega el numero dentro de otro array para Pasarselo a la Recursion
+                ArrayList<Integer> posiSwap = new ArrayList(); 
+                    posibilidad.forEach((n) -> posiSwap.add(n));
+                    posiSwap.add(totalPosibilidades.get(i));
+                    
+                // Elimina el numero que se colocó en el Array y le Pasa a la recurción el array sin ese numero
+                ArrayList<Integer> swap = new ArrayList(); 
+                    totalPosibilidades.forEach((n) -> swap.add(n));
+                    swap.remove(i);
+
+                cargarPosi(swap, posiSwap);
+            }
+        }
+    }
+    
+    public static int posibilidades (int posi){
+        if(posi<2)
+            return 1;
+        else
+            return posi*posibilidades(posi-1);
+    }
+    
+    
+    
+    
+    
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -365,6 +609,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -377,6 +622,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }
