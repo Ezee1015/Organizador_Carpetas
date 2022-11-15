@@ -51,7 +51,7 @@ public class Cargando extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Esto puede demorar varios minutos...");
+        jLabel3.setText("Esto puede demorar bastante tiempo...");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

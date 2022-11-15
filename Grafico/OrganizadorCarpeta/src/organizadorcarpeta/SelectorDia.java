@@ -23,7 +23,7 @@ public class SelectorDia extends javax.swing.JFrame {
         final int numeroDia;
         if(dia.equals("")) //Evita que puedas pasar un dia vacío
             return;
-        System.out.println("dia es " + dia);
+        
         switch(dia){
             case "Lunes": numeroDia=0; break;
             case "Martes": numeroDia=1; break;
