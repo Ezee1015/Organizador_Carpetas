@@ -34,7 +34,7 @@ public class SelectorDia extends javax.swing.JFrame {
         }
         initComponents();
         jLabel1.setText(dia);
-        setBounds(0,0,550,(menu.listaMaterias.size()/3)*35+135);
+        setBounds(0,0,550,(menu.listaMaterias.size()/3+1)*35+135);
         for(int i=0;i<MenuPrincipal.listaMaterias.size()/3+1;i++){ // vertical
             for(int x=0;x<3;x++){ //horizontal
                 // Si se va del rango
