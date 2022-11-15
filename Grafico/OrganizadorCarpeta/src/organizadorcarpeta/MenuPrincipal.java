@@ -9,22 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import com.formdev.flatlaf.FlatDarkLaf;
-import java.awt.Image;
-import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 
-/**
- *
- * @author PC01
- */
 public class MenuPrincipal extends javax.swing.JFrame {
     public static ArrayList<String> listaMaterias = new ArrayList<>();
     public static ArrayList<ArrayList<String>> diasMaterias = new ArrayList<>();
