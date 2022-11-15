@@ -14,8 +14,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     public static ArrayList<String> listaMaterias = new ArrayList<>();
     public static ArrayList<ArrayList<String>> diasMaterias = new ArrayList<>();
     public static ArrayList<ArrayList<Integer>> res = new ArrayList<>();
-    public static int materiasPorCarpeta;
-    public static int maximoCarpetasPorDia;
+    public static int materiasPorCarpeta = 2;
+    public static int maximoCarpetasPorDia = 2;
 
     public MenuPrincipal() {
         initComponents();
@@ -289,9 +289,16 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
+        if(jTextField1.getText().length()==0)
+            return;
         for (int i = 0; i < this.jTextField1.getText().length(); i++) {
             switch (jTextField1.getText().charAt(i)) {
                 case '0':
+                    if(Integer.parseInt(jTextField1.getText())!=0)
+                        break;
+                    jTextField1.setText(String.valueOf(materiasPorCarpeta));
+                    JOptionPane.showMessageDialog(null,"Solamente se pueden ingresar numeros positivos!");
+                    return;
                 case '1':
                 case '2':
                 case '3':
@@ -352,26 +359,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1KeyPressed
 
     private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
-        for (int i = 0; i < jTextField1.getText().length(); i++) {
-            switch (this.jTextField1.getText().charAt(i)) {
-                case '0':
-                case '1':
-                case '2':
-                case '3':
-                case '4':
-                case '5':
-                case '6':
-                case '7':
-                case '8':
-                case '9':
-                    break;
-                default:
-                    jTextField1.setText(String.valueOf(materiasPorCarpeta));
-                    JOptionPane.showMessageDialog(null,"Solamente se pueden ingresar numeros!");
-                    return;
-            }
-        }
-        materiasPorCarpeta=Integer.parseInt(jTextField1.getText());
+
     }//GEN-LAST:event_jTextField1KeyTyped
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -380,10 +368,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         Cargando temp = new Cargando();
-        temp.main(null);
-        setVisible(false);
+        temp.setLocationRelativeTo(null);
+        temp.setVisible(true);
         // funcion de calculos
+        if(jRadioButton2.isSelected())
+            cargaLenta();
+        temp.setVisible(false);
         temp.dispose();
+        setVisible(true); //temporal
         // Hacer visible la nueva ventana de los resultados
     }//GEN-LAST:event_jButton8ActionPerformed
 
@@ -404,9 +396,16 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField2KeyTyped
 
     private void jTextField2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyReleased
+        if(jTextField2.getText().length()==0)
+            return;
         for (int i = 0; i < jTextField2.getText().length(); i++) {
             switch (this.jTextField2.getText().charAt(i)) {
                 case '0':
+                    if(Integer.parseInt(jTextField2.getText())!=0)
+                        break;
+                    jTextField1.setText(String.valueOf(maximoCarpetasPorDia));
+                    JOptionPane.showMessageDialog(null,"Solamente se pueden ingresar numeros positivos!");
+                    return;
                 case '1':
                 case '2':
                 case '3':
@@ -557,9 +556,38 @@ public class MenuPrincipal extends javax.swing.JFrame {
             return posi*posibilidades(posi-1);
     }
     
-    
-    
-    
+    public static void imprimirCarpetaGanadora(int carpeta[][], int cantC[]){
+        //IMPRIME LA CARPETA Y LA CANTIDAD MAXIMA DE CARPETAS POR DÍA
+        int totalC=0;
+        for(int x=0; x<5; x++){
+            switch(x){
+                case 0 : System.out.print("     LUNES: "); break;
+                case 1 : System.out.print(" ; MARTES: "); break;
+                case 2 : System.out.print(" ; MIERCOLES: "); break;
+                case 3 : System.out.print(" ; JUEVES: "); break;
+                case 4 : System.out.print(" ; VIERNES: "); break;
+            }
+            System.out.print(cantC[x]);
+        }
+        System.out.println("");
+        for(int x=0;x<cantC.length;x++) totalC+=cantC[x];
+        System.out.println("     Cantidad de Carpetas Semanal: " + totalC);
+        System.out.print("     CARPETA: \n");
+            for(int y=0;y<(listaMaterias.size()/materiasPorCarpeta)+1;y++){
+                for(int x=0; x<materiasPorCarpeta;x++){
+                    System.out.print("       ");
+                    for(int i=0; i<listaMaterias.size();i++){
+                        if(carpeta[y][x]==i) System.out.print(listaMaterias.get(i));
+                    }
+                }
+                System.out.println();
+            }
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+    }
     
     
     
