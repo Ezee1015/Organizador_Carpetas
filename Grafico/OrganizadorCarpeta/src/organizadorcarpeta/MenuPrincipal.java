@@ -508,7 +508,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             // Carga la lista en las carpetas
             for(int x=0;x<listaMaterias.size(); x++) 
                 carpetas[x/materiasPorCarpeta][x%materiasPorCarpeta]=res.get(i).get(x);
-            /*
+            
             // Verifica que la matriz esté ordenada verticalmente, sino sale
             for(int y=0;y<listaMaterias.size()/materiasPorCarpeta;y++){ // Por cada carpeta
                 if(carpetas[y][0]==0 || carpetas[y+1][0]==0) // Si hay  una materia '0', significa que no hay materia
@@ -517,7 +517,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                     salir=true;
                     break;
                 }
-            }*/
+            }
             // Verifica que la matriz esté ordenada horizontalmente, sino sale
             for(int y=0;y<listaMaterias.size()/materiasPorCarpeta+1 && !salir;y++){ // Por cada carpeta
                 for(int x=0;x<materiasPorCarpeta-1;x++){ // Por cada materia
