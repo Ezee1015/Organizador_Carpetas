@@ -500,41 +500,31 @@ public class MenuPrincipal extends javax.swing.JFrame {
             totalPosibilidades.add(i);
         cargarPosi(totalPosibilidades, new ArrayList<>()); // Carga matriz posibilidades
             
-        for(int i=0;i<res.size();i++) { // Por cada Carpeta
+        for(int i=0;i<res.size();i++) { // Por cada poaiblidad
             boolean salir=false;
             int[][] carpetas = new int[(listaMaterias.size()/materiasPorCarpeta)+1][materiasPorCarpeta];
             // Carga la lista en las carpetas
             for(int x=0;x<listaMaterias.size(); x++) 
                 carpetas[x/materiasPorCarpeta][x%materiasPorCarpeta]=res.get(i).get(x);
-            /*//temp
-            for(int x=0;x<(listaMaterias.size()/materiasPorCarpeta)+1;x++){
-                for(int z=0;z<materiasPorCarpeta;z++)
-                    System.out.print(carpetas[x][z] + ", ");
-                System.out.println();
-            }
-            System.out.println("en");*/
+            
             // Verifica que la matriz esté ordenada verticalmente, sino sale
-            for(int y=0;y<listaMaterias.size()/materiasPorCarpeta+1 && !salir;y++){ // Por cada carpeta
-                for(int x=0;x<materiasPorCarpeta-1;x++){ // Por cada materia
-                    //System.out.print(carpetas[y][x] + ",");
-                    if(carpetas[y][x]==0 || carpetas[y][x+1]==0) // Si hay  una materia '0', significa que no hay materia
-                        break;
-                    if(carpetas[y][x]>carpetas[y][x+1]){ //Si no esta ordenado
-                        //System.out.println("dice que en la matriz " + res.get(i).toString() + " en la pos " + y*materiasPorCarpeta+x + "el " + carpetas[y][x] + "es mayor que " + carpetas[y][x+1]);
-                        salir=true;
-                        break;
-                    }
-                }
-                //System.out.println();
-            }
-            //System.out.println(salir + "-------");
-            // Verifica que la matriz esté ordenada horizontalmente, sino sale
             for(int y=0;y<listaMaterias.size()/materiasPorCarpeta;y++){ // Por cada carpeta
                 if(carpetas[y][0]==0 || carpetas[y+1][0]==0) // Si hay  una materia '0', significa que no hay materia
                     break;
                 if(carpetas[y][0]>=carpetas[y+1][0]){
                     salir=true;
                     break;
+                }
+            }
+            // Verifica que la matriz esté ordenada horizontalmente, sino sale
+            for(int y=0;y<listaMaterias.size()/materiasPorCarpeta+1 && !salir;y++){ // Por cada carpeta
+                for(int x=0;x<materiasPorCarpeta-1;x++){ // Por cada materia
+                    if(carpetas[y][x]==0 || carpetas[y][x+1]==0) // Si hay  una materia '0', significa que no hay materia
+                        break;
+                    if(carpetas[y][x]>carpetas[y][x+1]){ //Si no esta ordenado
+                        salir=true;
+                        break;
+                    }
                 }
             }
             
