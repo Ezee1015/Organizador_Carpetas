@@ -433,7 +433,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         ArrayList<Integer> totalPosibilidades = new ArrayList(); // VECTOR CON NUMEROS DEL 0 AL 'X' CANTIDAD DE MATERIAS PARA ENTREGARLO A LA FUNCION QUE RELLENA LA MATRIZ CON TODAS LAS POSIBILIDADES
         for(int i=1;i<=listaMaterias.size();i++)
             totalPosibilidades.add(i);
-        
+        res.clear();
         cargarPosi(totalPosibilidades, new ArrayList<>());
         
         ArrayList<int[][]> carpetasHistorial = new ArrayList();
@@ -484,9 +484,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
             if(Encontrado==0) { // Si no se encontró una matriz igual, imprimirlo
                 carpetasHistorial.add(carpetas);
                 int cantC[] = new int [5];
-                for(int x=0; x<5;x++){
+                for(int x=0; x<5;x++)
                     cantC[x] = carpetasPorDia(carpetas, diasMaterias.get(x));
-                }
+                
                 int max=cantC[0];
                 for(int x=1;x<cantC.length;x++) if(max<cantC[x]) max=cantC[x];
                 if(max<=maximoCarpetasPorDia) imprimirCarpetaGanadora(carpetas, cantC);
@@ -495,20 +495,19 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
     
     private void cargaRapida () {
-        ArrayList<Integer> totalPosibilidades = new ArrayList(); // VECTOR CON NUMEROS DEL 0 AL 'X' CANTIDAD DE MATERIAS PARA ENTREGARLO A LA FUNCION QUE RELLENA LA MATRIZ CON TODAS LAS POSIBILIDADES
+        ArrayList<Integer> totalPosibilidades = new ArrayList(); // VECTOR CON NUMEROS DEL 1 AL 'X' CANTIDAD DE MATERIAS PARA ENTREGARLO A LA FUNCION QUE RELLENA LA MATRIZ CON TODAS LAS POSIBILIDADES
         for(int i=1;i<=listaMaterias.size();i++)
             totalPosibilidades.add(i);
+        res.clear();
         cargarPosi(totalPosibilidades, new ArrayList<>()); // Carga matriz posibilidades
           
         
-        for(int i=0;i<res.size();i++) { // Por cada poaiblidad
+        for(int i=0;i<res.size();i++) { // Por cada posiblidad
             boolean salir=false;
             int[][] carpetas = new int[(listaMaterias.size()/materiasPorCarpeta)+1][materiasPorCarpeta];
             // Carga la lista en las carpetas
             for(int x=0;x<listaMaterias.size(); x++) 
                 carpetas[x/materiasPorCarpeta][x%materiasPorCarpeta]=res.get(i).get(x);
-            if(res.get(i).get(0)==1 && res.get(i).get(1)==4 && res.get(i).get(2)==2 && res.get(i).get(3)==3 && res.get(i).get(4)==5)
-                System.out.println("sisiisiisisisisissisisisi");
             /*
             // Verifica que la matriz esté ordenada verticalmente, sino sale
             for(int y=0;y<listaMaterias.size()/materiasPorCarpeta;y++){ // Por cada carpeta
@@ -522,32 +521,26 @@ public class MenuPrincipal extends javax.swing.JFrame {
             // Verifica que la matriz esté ordenada horizontalmente, sino sale
             for(int y=0;y<listaMaterias.size()/materiasPorCarpeta+1 && !salir;y++){ // Por cada carpeta
                 for(int x=0;x<materiasPorCarpeta-1;x++){ // Por cada materia
-                        if(res.get(i).get(0)==1 && res.get(i).get(1)==4 && res.get(i).get(2)==2 && res.get(i).get(3)==3 && res.get(i).get(4)==5)
-                            System.out.println("entra en el for");
                     if(carpetas[y][x]==0 || carpetas[y][x+1]==0) // Si hay  una materia '0', significa que no hay materia
                         break;
                     if(carpetas[y][x]>carpetas[y][x+1]){ //Si no esta ordenado
-                        if(res.get(i).get(0)==1 && res.get(i).get(1)==4 && res.get(i).get(2)==2 && res.get(i).get(3)==3 && res.get(i).get(4)==5)
-                            System.out.println("sale aca");
                         salir=true;
                         break;
                     }
                 }
             }
             
-            
             if(!salir){
-                        if(res.get(i).get(0)==1 && res.get(i).get(1)==4 && res.get(i).get(2)==2 && res.get(i).get(3)==3 && res.get(i).get(4)==5)
-                            System.out.println("quiere imprimirlo");
                 // imprimirlo
                 int cantC[] = new int [5];
-                for(int x=0; x<5;x++)
+                for(int x=0; x<5;x++){
                     cantC[x] = carpetasPorDia(carpetas, diasMaterias.get(x));
-                // falla por aca
+                    // System.out.println("cantC[" + x + "] es " + cantC[x]);
+                }
                 int max=cantC[0];
+                
                 for(int x=1;x<cantC.length;x++) if(max<cantC[x]) max=cantC[x];
                 if(max<=maximoCarpetasPorDia) imprimirCarpetaGanadora(carpetas, cantC);
-                System.out.println("mando a imprimirlo con " + maximoCarpetasPorDia + " de carpeta maximo");
             }
         }
     }
@@ -558,7 +551,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             ///COMPRUEBA EL NUMERO DE LA MATERIA
             int numeroMateria=-1;
             for(int x=0;x<listaMaterias.size();x++){ //Por la lista de materias, la encuentra
-                if(listaMaterias.get(x).equalsIgnoreCase(dia.get(i))) numeroMateria=x;
+                if(listaMaterias.get(x).equalsIgnoreCase(dia.get(i))) numeroMateria=x+1;
             }
             ///Empiza la Busqueda
             for(int x=0;x<(listaMaterias.size()/materiasPorCarpeta)+1;x++){
