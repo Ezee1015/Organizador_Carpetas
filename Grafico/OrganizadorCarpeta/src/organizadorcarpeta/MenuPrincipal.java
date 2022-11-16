@@ -498,36 +498,47 @@ public class MenuPrincipal extends javax.swing.JFrame {
         ArrayList<Integer> totalPosibilidades = new ArrayList(); // VECTOR CON NUMEROS DEL 0 AL 'X' CANTIDAD DE MATERIAS PARA ENTREGARLO A LA FUNCION QUE RELLENA LA MATRIZ CON TODAS LAS POSIBILIDADES
         for(int i=1;i<=listaMaterias.size();i++)
             totalPosibilidades.add(i);
-        
-        cargarPosi(totalPosibilidades, new ArrayList<>());
-        
-        for(int i=0;i<posibilidades(totalPosibilidades.size());i++) { // Por cada Carpeta
-            boolean salir=false;
+        cargarPosi(totalPosibilidades, new ArrayList<>()); // Carga matriz posibilidades
             
+        for(int i=0;i<res.size();i++) { // Por cada Carpeta
+            boolean salir=false;
+            int[][] carpetas = new int[(listaMaterias.size()/materiasPorCarpeta)+1][materiasPorCarpeta];
+            // Carga la lista en las carpetas
+            for(int x=0;x<listaMaterias.size(); x++) 
+                carpetas[x/materiasPorCarpeta][x%materiasPorCarpeta]=res.get(i).get(x);
+            /*//temp
+            for(int x=0;x<(listaMaterias.size()/materiasPorCarpeta)+1;x++){
+                for(int z=0;z<materiasPorCarpeta;z++)
+                    System.out.print(carpetas[x][z] + ", ");
+                System.out.println();
+            }
+            System.out.println("en");*/
             // Verifica que la matriz esté ordenada verticalmente, sino sale
-            for(int y=0;y<res.get(i).size();y++){
-                for(int x=0;x<materiasPorCarpeta-1;x++){
-                    if(res.get(i).get(x)>=res.get(i).get(x+1)){
+            for(int y=0;y<listaMaterias.size()/materiasPorCarpeta+1 && !salir;y++){ // Por cada carpeta
+                for(int x=0;x<materiasPorCarpeta-1;x++){ // Por cada materia
+                    //System.out.print(carpetas[y][x] + ",");
+                    if(carpetas[y][x]==0 || carpetas[y][x+1]==0) // Si hay  una materia '0', significa que no hay materia
+                        break;
+                    if(carpetas[y][x]>carpetas[y][x+1]){ //Si no esta ordenado
+                        //System.out.println("dice que en la matriz " + res.get(i).toString() + " en la pos " + y*materiasPorCarpeta+x + "el " + carpetas[y][x] + "es mayor que " + carpetas[y][x+1]);
                         salir=true;
                         break;
                     }
                 }
+                //System.out.println();
             }
+            //System.out.println(salir + "-------");
             // Verifica que la matriz esté ordenada horizontalmente, sino sale
-            for(int y=0;y<res.get(i).size();y++){
-                if(res.get(i).get(y)>=res.get(i).get(y+(materiasPorCarpeta-1))){
+            for(int y=0;y<listaMaterias.size()/materiasPorCarpeta;y++){ // Por cada carpeta
+                if(carpetas[y][0]==0 || carpetas[y+1][0]==0) // Si hay  una materia '0', significa que no hay materia
+                    break;
+                if(carpetas[y][0]>=carpetas[y+1][0]){
                     salir=true;
                     break;
                 }
-                y=y+materiasPorCarpeta-1;
             }
             
             if(!salir){
-                int carpetas[][] = new int[(listaMaterias.size()/materiasPorCarpeta)+1][materiasPorCarpeta];
-                // Carga la lista en las carpetas
-                for(int x=1;x<=listaMaterias.size(); x++) 
-                    carpetas[(x-1)/materiasPorCarpeta][(x-1)%materiasPorCarpeta]=res.get(i).get(x-1);
-
                 // imprimirlo
                 int cantC[] = new int [5];
                 for(int x=0; x<5;x++){
@@ -622,15 +633,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 for(int x=0; x<materiasPorCarpeta;x++){
                     System.out.print("       ");
                     for(int i=0; i<listaMaterias.size();i++){
-                        if(carpeta[y][x]==i) System.out.print(listaMaterias.get(i));
+                        if(carpeta[y][x]-1==i) System.out.print(listaMaterias.get(i));
                     }
                 }
                 System.out.println();
             }
-            System.out.println();
-            System.out.println();
-            System.out.println();
-            System.out.println();
             System.out.println();
     }
     
