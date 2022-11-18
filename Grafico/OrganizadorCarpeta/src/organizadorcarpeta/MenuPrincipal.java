@@ -382,14 +382,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
                     cargaRapida();
                 temp.setVisible(false);
                 temp.dispose();
+                setVisible(true);
+                // Hacer visible la nueva ventana de los resultados
                 MostrarPosibilidades carpetas = new MostrarPosibilidades(0);
                 carpetas.main(carpetasGuardadas, listaMaterias.size());
-                System.out.println("Thread Running");
-                setVisible(true); //temporal
             }
         };
         thread.start();
-        // Hacer visible la nueva ventana de los resultados
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed

@@ -70,7 +70,7 @@ public class MostrarPosibilidades extends javax.swing.JFrame {
         jScrollPane7 = new javax.swing.JScrollPane();
         jList6 = new javax.swing.JList<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jButton1.setText("Anterior Posibilidad");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
