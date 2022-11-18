@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import com.formdev.flatlaf.FlatDarkLaf;
+import javax.swing.SwingUtilities;
 
 public class MenuPrincipal extends javax.swing.JFrame {
     public static ArrayList<String> listaMaterias = new ArrayList<>();
@@ -367,17 +368,27 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        Cargando temp = new Cargando();
+        
+        final Cargando temp = new Cargando();
         temp.setLocationRelativeTo(null);
         temp.setVisible(true);
-        // funcion de calculos
-        if(jRadioButton2.isSelected())
-            cargaLenta();
-        else // if(jRadioButton2.isSelected())
-            cargaRapida();
-        temp.setVisible(false);
-        temp.dispose();
-        setVisible(true); //temporal
+
+        Thread thread = new Thread(){
+            public void run(){
+                // funcion de calculos
+                if(jRadioButton2.isSelected())
+                    cargaLenta();
+                else // if(jRadioButton2.isSelected())
+                    cargaRapida();
+                temp.setVisible(false);
+                temp.dispose();
+                MostrarPosibilidades carpetas = new MostrarPosibilidades(0);
+                carpetas.main(carpetasGuardadas, listaMaterias.size());
+                System.out.println("Thread Running");
+                setVisible(true); //temporal
+            }
+        };
+        thread.start();
         // Hacer visible la nueva ventana de los resultados
     }//GEN-LAST:event_jButton8ActionPerformed
 
@@ -489,7 +500,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 
                 int max=cantC[0];
                 for(int x=1;x<cantC.length;x++) if(max<cantC[x]) max=cantC[x];
-                if(max<=maximoCarpetasPorDia) imprimirCarpetaGanadora(carpetas, cantC);
+                if(max<=maximoCarpetasPorDia) guardarCarpeta(carpetas);
             }
         }
     }
@@ -540,7 +551,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 int max=cantC[0];
                 
                 for(int x=1;x<cantC.length;x++) if(max<cantC[x]) max=cantC[x];
-                if(max<=maximoCarpetasPorDia) imprimirCarpetaGanadora(carpetas, cantC);
+                if(max<=maximoCarpetasPorDia) guardarCarpeta(carpetas);
             }
         }
     }
@@ -606,33 +617,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
             return posi*posibilidades(posi-1);
     }
     
-    public static void imprimirCarpetaGanadora(int carpeta[][], int cantC[]){
-        //IMPRIME LA CARPETA Y LA CANTIDAD MAXIMA DE CARPETAS POR DÍA
-        int totalC=0;
-        for(int x=0; x<5; x++){
-            switch(x){
-                case 0 : System.out.print("     LUNES: "); break;
-                case 1 : System.out.print(" ; MARTES: "); break;
-                case 2 : System.out.print(" ; MIERCOLES: "); break;
-                case 3 : System.out.print(" ; JUEVES: "); break;
-                case 4 : System.out.print(" ; VIERNES: "); break;
-            }
-            System.out.print(cantC[x]);
-        }
-        System.out.println("");
-        for(int x=0;x<cantC.length;x++) totalC+=cantC[x];
-        System.out.println("     Cantidad de Carpetas Semanal: " + totalC);
-        System.out.print("     CARPETA: \n");
-            for(int y=0;y<(listaMaterias.size()/materiasPorCarpeta)+1;y++){
-                for(int x=0; x<materiasPorCarpeta;x++){
-                    System.out.print("       ");
-                    for(int i=0; i<listaMaterias.size();i++){
-                        if(carpeta[y][x]-1==i) System.out.print(listaMaterias.get(i));
-                    }
-                }
-                System.out.println();
-            }
-            System.out.println();
+    private static ArrayList<Carpetas> carpetasGuardadas = new ArrayList();
+    public static void guardarCarpeta(int carpeta[][]){
+        carpetasGuardadas.add(new Carpetas(carpeta));
     }
     
     

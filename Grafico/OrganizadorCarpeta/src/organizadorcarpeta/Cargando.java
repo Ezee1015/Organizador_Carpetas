@@ -22,11 +22,11 @@ public class Cargando extends javax.swing.JFrame {
      */
     public Cargando() {
         initComponents();
-        ImageIcon image = new ImageIcon("src/organizadorcarpeta/carga.gif");
-        Icon icon = new ImageIcon(image.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
-        JLabel gif = new JLabel(icon);
-        gif.setBounds(150,30,100,100);
-        add(gif);
+//        ImageIcon image = new ImageIcon("src/organizadorcarpeta/carga.gif");
+//        Icon icon = new ImageIcon(image.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+//        JLabel gif = new JLabel(icon);
+//        gif.setBounds(150,30,100,100);
+//        add(gif);
     }
 
     /**
