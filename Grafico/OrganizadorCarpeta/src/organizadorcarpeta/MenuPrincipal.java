@@ -384,8 +384,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 temp.dispose();
                 setVisible(true);
                 // Hacer visible la nueva ventana de los resultados
-                MostrarPosibilidades carpetas = new MostrarPosibilidades(0);
-                carpetas.main(carpetasGuardadas, listaMaterias.size());
+                MostrarPosibilidades carpetas = new MostrarPosibilidades();
+                carpetas.main(carpetasGuardadas, diasMaterias);
             }
         };
         thread.start();

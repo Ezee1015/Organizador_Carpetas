@@ -8,6 +8,7 @@ package organizadorcarpeta;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import javax.swing.UIManager;
 
 /**
@@ -17,14 +18,94 @@ import javax.swing.UIManager;
 public class MostrarPosibilidades extends javax.swing.JFrame {
     int pos=0;
     static ArrayList<Carpetas> carpetas;
+    static ArrayList<ArrayList<String>> diasMaterias;
+    private static DefaultListModel<String> listaCarpetasModel = new DefaultListModel<>();
+    private static DefaultListModel<String> lunesModel = new DefaultListModel<>();
+    private static DefaultListModel<String> martesModel = new DefaultListModel<>();
+    private static DefaultListModel<String> miercolesModel = new DefaultListModel<>();
+    private static DefaultListModel<String> juevesModel = new DefaultListModel<>();
+    private static DefaultListModel<String> viernesModel = new DefaultListModel<>();
     
-    public MostrarPosibilidades(int cantMaterias) {
+    public MostrarPosibilidades() {
         initComponents();
-        actualizarVista();
+        if(carpetas!=null && !carpetas.isEmpty()) actualizarVista();
+        else {
+            jButton1.setEnabled(false);
+            jButton2.setEnabled(false);
+        }
     }
 
     private void actualizarVista(){
-        
+        // SETEA EL TITULO
+        jLabel1.setText("Posibilidad " + (pos+1) + " de " + carpetas.size());
+        // SETEA LAS CARPETAS POR DIA Y EL TOTAL
+        jLabel2.setText("Carpetas: " + MenuPrincipal.carpetasPorDia(carpetas.get(pos).getCarpeta(), diasMaterias.get(0)));
+        jLabel3.setText("Carpetas: " + MenuPrincipal.carpetasPorDia(carpetas.get(pos).getCarpeta(), diasMaterias.get(1)));
+        jLabel6.setText("Carpetas: " + MenuPrincipal.carpetasPorDia(carpetas.get(pos).getCarpeta(), diasMaterias.get(2)));
+        jLabel8.setText("Carpetas: " + MenuPrincipal.carpetasPorDia(carpetas.get(pos).getCarpeta(), diasMaterias.get(3)));
+        jLabel10.setText("Carpetas: " + MenuPrincipal.carpetasPorDia(carpetas.get(pos).getCarpeta(), diasMaterias.get(4)));
+        int totCarpetas = 0;
+        for(int i=0;i<5;i++)
+            totCarpetas+=MenuPrincipal.carpetasPorDia(carpetas.get(pos).getCarpeta(), diasMaterias.get(i));
+        jLabel15.setText("Total de Carpetas Semanal: " + totCarpetas);
+        //ACTIVA Y DESACTIVA LOS BOTONES
+        if(pos==0)
+            jButton1.setEnabled(false);
+        if(pos==carpetas.size()-1)
+            jButton2.setEnabled(false);
+        // MUESTRA LA LISTA DE CARPETAS 
+        listaCarpetasModel.clear();
+        for(int i=0;i<carpetas.get(pos).getCarpeta().length;i++){
+            listaCarpetasModel.addElement("Carpeta " + (i+1) + ":");
+            for(int x=0;x<MenuPrincipal.materiasPorCarpeta;x++){
+                int numeroMateria = carpetas.get(pos).getCarpeta()[i][x]-1;
+                if(numeroMateria!=-1)
+                    listaCarpetasModel.addElement("     - " + MenuPrincipal.listaMaterias.get(numeroMateria));
+            }
+            listaCarpetasModel.addElement("");
+        }
+        jList7.setModel(listaCarpetasModel);
+        // POR CADA DIA AGREGA LAS CARPETAS
+            // Lunes
+            lunesModel.clear();
+            for(int i=0;i<diasMaterias.get(0).size();i++){
+                String nombreCarpeta = "Carpeta " + (carpetas.get(pos).encontrarPosCarpeta(diasMaterias.get(0).get(i))+1);
+                if(!lunesModel.contains(nombreCarpeta))
+                    lunesModel.addElement(nombreCarpeta);
+            }
+            jList1.setModel(lunesModel);
+            // Martes
+            martesModel.clear();
+            for(int i=0;i<diasMaterias.get(1).size();i++){
+                String nombreCarpeta = "Carpeta " + (carpetas.get(pos).encontrarPosCarpeta(diasMaterias.get(1).get(i))+1);
+                if(!martesModel.contains(nombreCarpeta))
+                    martesModel.addElement(nombreCarpeta);
+            }
+            jList2.setModel(martesModel);
+            // Miercoles
+            miercolesModel.clear();
+            for(int i=0;i<diasMaterias.get(2).size();i++){
+                String nombreCarpeta = "Carpeta " + (carpetas.get(pos).encontrarPosCarpeta(diasMaterias.get(2).get(i))+1);
+                if(!miercolesModel.contains(nombreCarpeta))
+                    miercolesModel.addElement(nombreCarpeta);
+            }
+            jList3.setModel(miercolesModel);
+            // Jueves
+            juevesModel.clear();
+            for(int i=0;i<diasMaterias.get(3).size();i++){
+                String nombreCarpeta = "Carpeta " + (carpetas.get(pos).encontrarPosCarpeta(diasMaterias.get(3).get(i))+1);
+                if(!juevesModel.contains(nombreCarpeta))
+                    juevesModel.addElement(nombreCarpeta);
+            }
+            jList4.setModel(juevesModel);
+            // Viernes
+            viernesModel.clear();
+            for(int i=0;i<diasMaterias.get(4).size();i++){
+                String nombreCarpeta = "Carpeta " + (carpetas.get(pos).encontrarPosCarpeta(diasMaterias.get(4).get(i))+1);
+                if(!viernesModel.contains(nombreCarpeta))
+                    viernesModel.addElement(nombreCarpeta);
+            }
+            jList6.setModel(viernesModel);
     }
     
     /** This method is called from within the constructor to
@@ -80,17 +161,22 @@ public class MostrarPosibilidades extends javax.swing.JFrame {
         });
 
         jButton2.setText("Siguiente Posibilidad");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Posibilidad 55 de 110");
+        jLabel1.setText("Posibilidad 0 de 0");
 
         jPanel1.setBackground(new java.awt.Color(102, 102, 102));
         jPanel1.setPreferredSize(new java.awt.Dimension(140, 72));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Carpetas: XX");
+        jLabel2.setText("Carpetas: 0");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -114,18 +200,20 @@ public class MostrarPosibilidades extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
-                .addGap(0, 11, Short.MAX_VALUE))
+                .addGap(0, 16, Short.MAX_VALUE))
         );
 
+        jList1.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            String[] strings = { "" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
         jScrollPane2.setViewportView(jList1);
 
+        jList2.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jList2.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            String[] strings = { "" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
@@ -135,7 +223,7 @@ public class MostrarPosibilidades extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Carpetas: XX");
+        jLabel3.setText("Carpetas: 0");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -162,8 +250,9 @@ public class MostrarPosibilidades extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
+        jList3.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jList3.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            String[] strings = { "" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
@@ -173,7 +262,7 @@ public class MostrarPosibilidades extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Carpetas: XX");
+        jLabel6.setText("Carpetas: 0");
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -200,8 +289,9 @@ public class MostrarPosibilidades extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
+        jList4.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jList4.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            String[] strings = { "" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
@@ -211,7 +301,7 @@ public class MostrarPosibilidades extends javax.swing.JFrame {
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Carpetas: XX");
+        jLabel8.setText("Carpetas: 0");
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
@@ -242,7 +332,7 @@ public class MostrarPosibilidades extends javax.swing.JFrame {
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Carpetas: XX");
+        jLabel10.setText("Carpetas: 0");
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
@@ -279,10 +369,10 @@ public class MostrarPosibilidades extends javax.swing.JFrame {
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel15.setText("Total de Carpetas Semanal: XX");
+        jLabel15.setText("Total de Carpetas Semanal: 0");
 
         jList7.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            String[] strings = { "" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
@@ -292,16 +382,14 @@ public class MostrarPosibilidades extends javax.swing.JFrame {
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                                .addComponent(jLabel15)
-                                .addGap(0, 14, Short.MAX_VALUE))
-                            .addComponent(jScrollPane1))))
+                        .addComponent(jLabel15)
+                        .addGap(0, 14, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
@@ -311,13 +399,14 @@ public class MostrarPosibilidades extends javax.swing.JFrame {
                 .addComponent(jLabel15)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel14)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
+        jList6.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jList6.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            String[] strings = { "" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
@@ -358,7 +447,7 @@ public class MostrarPosibilidades extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -392,13 +481,23 @@ public class MostrarPosibilidades extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        pos--;
+        if(pos==0)
+            jButton1.setEnabled(false);
+        jButton2.setEnabled(true);
+        actualizarVista();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(ArrayList<Carpetas> carpetasPrincipal, int cantMaterias) {
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        pos++;
+        if(pos==carpetas.size()-1)
+            jButton2.setEnabled(false);
+        jButton1.setEnabled(true);
+        actualizarVista();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    public static void main(ArrayList<Carpetas> carpetasPrincipal, ArrayList<ArrayList<String>> diasMateriasPrincipal) {
+        diasMaterias = diasMateriasPrincipal;
         carpetas = carpetasPrincipal;
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -433,7 +532,7 @@ public class MostrarPosibilidades extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                MostrarPosibilidades temp = new MostrarPosibilidades(cantMaterias);
+                MostrarPosibilidades temp = new MostrarPosibilidades();
                 temp.setLocationRelativeTo(null);
                 temp.setVisible(true);
             }
