@@ -57,16 +57,17 @@ public class SelectorDia extends javax.swing.JFrame {
                         MenuPrincipal.diasMaterias.remove(numeroDia+1);
                         System.out.println("se activo el " + MenuPrincipal.listaMaterias.get(pos));
                     } else {
-                        for(int z=0;z<MenuPrincipal.diasMaterias.size();z++){
-                            if(MenuPrincipal.diasMaterias.get(z).equals(MenuPrincipal.listaMaterias.get(pos))){
-                                ArrayList<String> temp = MenuPrincipal.diasMaterias.get(numeroDia);
+                        for(int z=0;z<MenuPrincipal.diasMaterias.get(numeroDia).size();z++){
+                            if(MenuPrincipal.diasMaterias.get(numeroDia).get(z).equals(MenuPrincipal.listaMaterias.get(pos))){
+                                ArrayList<String> temp = new ArrayList<>();
+                                temp.addAll(MenuPrincipal.diasMaterias.get(numeroDia));
                                 temp.remove(z);
+                                System.out.println(temp.toString());
                                 menu.diasMaterias.add(numeroDia, temp);
                                 menu.diasMaterias.remove(numeroDia+1);
                                 return;
                             }
                         }
-                        System.out.println("se desactivo el " + MenuPrincipal.listaMaterias.get(pos));
                     }
                 });  
             }
@@ -85,7 +86,8 @@ public class SelectorDia extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setUndecorated(true);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
