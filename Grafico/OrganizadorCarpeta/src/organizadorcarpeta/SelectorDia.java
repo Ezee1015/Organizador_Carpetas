@@ -55,14 +55,12 @@ public class SelectorDia extends javax.swing.JFrame {
                         temp.add(MenuPrincipal.listaMaterias.get(pos));
                         MenuPrincipal.diasMaterias.add(numeroDia, temp);
                         MenuPrincipal.diasMaterias.remove(numeroDia+1);
-                        System.out.println("se activo el " + MenuPrincipal.listaMaterias.get(pos));
                     } else {
                         for(int z=0;z<MenuPrincipal.diasMaterias.get(numeroDia).size();z++){
                             if(MenuPrincipal.diasMaterias.get(numeroDia).get(z).equals(MenuPrincipal.listaMaterias.get(pos))){
                                 ArrayList<String> temp = new ArrayList<>();
                                 temp.addAll(MenuPrincipal.diasMaterias.get(numeroDia));
                                 temp.remove(z);
-                                System.out.println(temp.toString());
                                 menu.diasMaterias.add(numeroDia, temp);
                                 menu.diasMaterias.remove(numeroDia+1);
                                 return;
