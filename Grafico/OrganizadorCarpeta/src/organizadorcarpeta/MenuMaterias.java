@@ -122,15 +122,15 @@ public class MenuMaterias extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
-        
+
         try {
             UIManager.setLookAndFeel(new FlatDarkLaf());
         } catch (Exception e) {
             System.out.println(e);
         }
-        
+
 //        try {
 //            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
 //                if ("Nimbus".equals(info.getName())) {
@@ -158,12 +158,11 @@ public class MenuMaterias extends javax.swing.JFrame {
             }
         });
     }
-    
+
     public static void actualizarLista() {
-        if(model.isEmpty())
-            return;
-        
-         model.clear();
+        if(!model.isEmpty())
+            model.clear();
+
          for (int i = 0; i < MenuPrincipal.listaMaterias.size(); i++) {
              model.addElement(MenuPrincipal.listaMaterias.get(i));
          }
