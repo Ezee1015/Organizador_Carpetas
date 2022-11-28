@@ -397,12 +397,31 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 setVisible(true);
                 // Hacer visible la nueva ventana de los resultados
                 MostrarPosibilidades carpetas = new MostrarPosibilidades();
+                ordenarCarpetasGuardadas();
                 carpetas.main(carpetasGuardadas, diasMaterias);
             }
         };
         thread.start();
     }//GEN-LAST:event_jButton8ActionPerformed
 
+    private void ordenarCarpetasGuardadas(){
+        for(int x=0;x<carpetasGuardadas.size();x++){
+            for(int i=0;i<carpetasGuardadas.size()-1;i++){
+                int sumaI=0;
+                for(int y=0; y<5;y++)
+                    sumaI += carpetasPorDia(carpetasGuardadas.get(i).getCarpeta(), diasMaterias.get(x));
+                int sumaI2=0;
+                for(int y=0; y<5;y++)
+                    sumaI2 += carpetasPorDia(carpetasGuardadas.get(i).getCarpeta(), diasMaterias.get(x));
+                
+                if(sumaI > sumaI2){
+                    carpetasGuardadas.add(i+2, carpetasGuardadas.get(i));
+                    carpetasGuardadas.remove(i);
+                }
+            }
+        }
+    }
+    
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton2ActionPerformed
@@ -455,8 +474,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
             diasMaterias.get(i).clear();
         for(int i=0;i<res.size();i++)
             res.get(i).clear();
-        int materiasPorCarpeta = 2;
-        int maximoCarpetasPorDia = 2;
+        materiasPorCarpeta = 2;
+        maximoCarpetasPorDia = 2;
         jTextField1.setText("2");
         jTextField2.setText("2");
         MenuMaterias.actualizarLista();
@@ -470,6 +489,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         for(int i=1;i<=listaMaterias.size();i++)
             totalPosibilidades.add(i);
         res.clear();
+        carpetasGuardadas.clear();
         cargarPosi(totalPosibilidades, new ArrayList<>());
         
         ArrayList<int[][]> carpetasHistorial = new ArrayList();
@@ -482,9 +502,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
             for(int x=0;x<(listaMaterias.size()/materiasPorCarpeta)+1;x++) { // por cada vector... (ordena horizontalmente)
                 for(int z=0;z<materiasPorCarpeta;z++){ // Repetir la cantidad de veces de largo del vector
                     for(int y=1;y<materiasPorCarpeta;y++){ // Recorrer por cada materia
-                        if(carpetas[x][y-1] == 0) carpetas[x][y-1] = 2147483647; // si es 0, o sea vacio, lo llena con el int mas grande
-                        if(carpetas[x][y-1] > carpetas[x][y]) { // Aplica Burbujeo
-                            int swap = carpetas[x][y-1];
+                        if(carpetas[x][y-1] == 0 || carpetas[x][y-1] > carpetas[x][y]) { // Aplica Burbujeo
+                            int swap = carpetas[x][y-1]; 
                             carpetas[x][y-1] = carpetas[x][y];
                             carpetas[x][y] = swap;
                         }
@@ -535,6 +554,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         for(int i=1;i<=listaMaterias.size();i++)
             totalPosibilidades.add(i);
         res.clear();
+        carpetasGuardadas.clear();
         cargarPosi(totalPosibilidades, new ArrayList<>()); // Carga matriz posibilidades
           
         
@@ -545,15 +565,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
             for(int x=0;x<listaMaterias.size(); x++) 
                 carpetas[x/materiasPorCarpeta][x%materiasPorCarpeta]=res.get(i).get(x);
             
-            // Verifica que la matriz esté ordenada verticalmente, sino sale
-            for(int y=0;y<listaMaterias.size()/materiasPorCarpeta;y++){ // Por cada carpeta
-                if(carpetas[y][0]==0 || carpetas[y+1][0]==0) // Si hay  una materia '0', significa que no hay materia
-                    break;
-                if(carpetas[y][0]>carpetas[y+1][0]){
-                    salir=true;
-                    break;
-                }
-            }
             // Verifica que la matriz esté ordenada horizontalmente, sino sale
             for(int y=0;y<listaMaterias.size()/materiasPorCarpeta+1 && !salir;y++){ // Por cada carpeta
                 for(int x=0;x<materiasPorCarpeta-1;x++){ // Por cada materia
@@ -567,18 +578,37 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
             
             if(!salir){
-                // imprimirlo
+                // verifica que no seupera el limite de carpetas
                 int cantC[] = new int [5];
-                for(int x=0; x<5;x++){
+                for(int x=0; x<5;x++)
                     cantC[x] = carpetasPorDia(carpetas, diasMaterias.get(x));
-                    // System.out.println("cantC[" + x + "] es " + cantC[x]);
-                }
-                int max=cantC[0];
                 
+                int max=cantC[0];
                 for(int x=1;x<cantC.length;x++) if(max<cantC[x]) max=cantC[x];
-                if(max<=maximoCarpetasPorDia) guardarCarpeta(carpetas);
+                
+                // Ordena la matriz verticalmente y verifica que no se haya ingresado antes
+                for(int x=0;x<(listaMaterias.size()/materiasPorCarpeta)+1;x++) {
+                    for(int y=1;y<(listaMaterias.size()/materiasPorCarpeta)+1;y++){
+                        if(carpetas[y-1][0] > carpetas[y][0]) { // Aplica Burbujeo
+                            int swap[] = new int[materiasPorCarpeta];
+                            System.arraycopy(carpetas[y-1], 0, swap, 0, materiasPorCarpeta); //System.out.println(swap[z]);
+                            System.arraycopy(carpetas[y], 0, carpetas[y-1], 0, materiasPorCarpeta);
+                            System.arraycopy(swap, 0, carpetas[y], 0, materiasPorCarpeta);
+                        }
+                    }
+                }
+                
+                // imprime
+                if(max<=maximoCarpetasPorDia && !yaGuardada(carpetas)) guardarCarpeta(carpetas);
             }
         }
+    }
+    
+    private static boolean yaGuardada (int carpeta[][]){
+        for(Carpetas a : carpetasGuardadas)
+            if(a.compara(carpeta))
+                return true;
+        return false;
     }
     
     public static int carpetasPorDia (int carpeta[][], ArrayList<String> dia) {
@@ -586,9 +616,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         for(int i=0;i<dia.size();i++){// Por cada materia del dia
             ///COMPRUEBA EL NUMERO DE LA MATERIA
             int numeroMateria=-1;
-            for(int x=0;x<listaMaterias.size();x++){ //Por la lista de materias, la encuentra
+            for(int x=0;x<listaMaterias.size();x++) //Por la lista de materias, la encuentra
                 if(listaMaterias.get(x).equalsIgnoreCase(dia.get(i))) numeroMateria=x+1;
-            }
+            
             ///Empiza la Busqueda
             for(int x=0;x<(listaMaterias.size()/materiasPorCarpeta)+1;x++){
                 for(int y=0;y<materiasPorCarpeta;y++){
@@ -599,6 +629,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         }
         ArrayList<Integer> carpetasEncontradas = new ArrayList();
+                            System.out.println(eleccionCarpeta.toString());
             
         for(int i=0;i<eleccionCarpeta.size();i++){
             // VERIFICA SI LA CARPETA YA SE HABIA ENCONTRADO

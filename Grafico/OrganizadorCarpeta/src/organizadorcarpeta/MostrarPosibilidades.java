@@ -25,7 +25,7 @@ public class MostrarPosibilidades extends javax.swing.JFrame {
     private static DefaultListModel<String> miercolesModel = new DefaultListModel<>();
     private static DefaultListModel<String> juevesModel = new DefaultListModel<>();
     private static DefaultListModel<String> viernesModel = new DefaultListModel<>();
-    
+
     public MostrarPosibilidades() {
         initComponents();
         if(carpetas!=null && !carpetas.isEmpty()) actualizarVista();
@@ -53,7 +53,7 @@ public class MostrarPosibilidades extends javax.swing.JFrame {
             jButton1.setEnabled(false);
         if(pos==carpetas.size()-1)
             jButton2.setEnabled(false);
-        // MUESTRA LA LISTA DE CARPETAS 
+        // MUESTRA LA LISTA DE CARPETAS
         listaCarpetasModel.clear();
         for(int i=0;i<carpetas.get(pos).getCarpeta().length;i++){
             listaCarpetasModel.addElement("Carpeta " + (i+1) + ":");
@@ -69,45 +69,70 @@ public class MostrarPosibilidades extends javax.swing.JFrame {
             // Lunes
             lunesModel.clear();
             for(int i=0;i<diasMaterias.get(0).size();i++){
-                String nombreCarpeta = "Carpeta " + (carpetas.get(pos).encontrarPosCarpeta(diasMaterias.get(0).get(i))+1);
-                if(!lunesModel.contains(nombreCarpeta))
-                    lunesModel.addElement(nombreCarpeta);
+                int numeroCarp = carpetas.get(pos).encontrarPosCarpeta(diasMaterias.get(0).get(i));
+                if(numeroCarp!=-1){
+                    String nombreCarpeta = "Carpeta " + (numeroCarp+1);
+                    if(!lunesModel.contains(nombreCarpeta))
+                        lunesModel.addElement(nombreCarpeta);
+                }
             }
+            if(lunesModel.isEmpty())
+                lunesModel.addElement(" ");
             jList1.setModel(lunesModel);
             // Martes
             martesModel.clear();
             for(int i=0;i<diasMaterias.get(1).size();i++){
-                String nombreCarpeta = "Carpeta " + (carpetas.get(pos).encontrarPosCarpeta(diasMaterias.get(1).get(i))+1);
-                if(!martesModel.contains(nombreCarpeta))
-                    martesModel.addElement(nombreCarpeta);
+                int numeroCarp = carpetas.get(pos).encontrarPosCarpeta(diasMaterias.get(1).get(i));
+                if(numeroCarp!=-1){
+                    String nombreCarpeta = "Carpeta " + (numeroCarp+1);
+                    if(!martesModel.contains(nombreCarpeta))
+                        martesModel.addElement(nombreCarpeta);
+                }
             }
+            if(martesModel.isEmpty())
+                martesModel.addElement(" ");
             jList2.setModel(martesModel);
             // Miercoles
             miercolesModel.clear();
             for(int i=0;i<diasMaterias.get(2).size();i++){
-                String nombreCarpeta = "Carpeta " + (carpetas.get(pos).encontrarPosCarpeta(diasMaterias.get(2).get(i))+1);
-                if(!miercolesModel.contains(nombreCarpeta))
-                    miercolesModel.addElement(nombreCarpeta);
+                int numeroCarp = carpetas.get(pos).encontrarPosCarpeta(diasMaterias.get(2).get(i));
+                if(numeroCarp!=-1){
+                    String nombreCarpeta = "Carpeta " + (numeroCarp+1);
+                    if(!miercolesModel.contains(nombreCarpeta))
+                        miercolesModel.addElement(nombreCarpeta);
+                }
             }
+            if(miercolesModel.isEmpty())
+                miercolesModel.addElement(" ");
             jList3.setModel(miercolesModel);
             // Jueves
             juevesModel.clear();
             for(int i=0;i<diasMaterias.get(3).size();i++){
-                String nombreCarpeta = "Carpeta " + (carpetas.get(pos).encontrarPosCarpeta(diasMaterias.get(3).get(i))+1);
-                if(!juevesModel.contains(nombreCarpeta))
-                    juevesModel.addElement(nombreCarpeta);
+                int numeroCarp = carpetas.get(pos).encontrarPosCarpeta(diasMaterias.get(3).get(i));
+                if(numeroCarp!=-1){
+                    String nombreCarpeta = "Carpeta " + (numeroCarp+1);
+                    if(!juevesModel.contains(nombreCarpeta))
+                        juevesModel.addElement(nombreCarpeta);
+                }
             }
+            if(juevesModel.isEmpty())
+                juevesModel.addElement(" ");
             jList4.setModel(juevesModel);
             // Viernes
             viernesModel.clear();
             for(int i=0;i<diasMaterias.get(4).size();i++){
-                String nombreCarpeta = "Carpeta " + (carpetas.get(pos).encontrarPosCarpeta(diasMaterias.get(4).get(i))+1);
-                if(!viernesModel.contains(nombreCarpeta))
-                    viernesModel.addElement(nombreCarpeta);
+                int numeroCarp = carpetas.get(pos).encontrarPosCarpeta(diasMaterias.get(4).get(i));
+                if(numeroCarp!=-1){
+                    String nombreCarpeta = "Carpeta " + (numeroCarp+1);
+                    if(!viernesModel.contains(nombreCarpeta))
+                        viernesModel.addElement(nombreCarpeta);
+                }
             }
+            if(viernesModel.isEmpty())
+                viernesModel.addElement(" ");
             jList6.setModel(viernesModel);
     }
-    
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -502,15 +527,15 @@ public class MostrarPosibilidades extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
-        
+
         try {
             UIManager.setLookAndFeel(new FlatDarkLaf());
         } catch (Exception e) {
             System.out.println(e);
         }
-        
+
 //        try {
 //            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
 //                if ("Nimbus".equals(info.getName())) {
